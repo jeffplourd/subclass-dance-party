@@ -2,13 +2,15 @@ $(document).ready(function(){
   window.dancers = [];
   window.bear = new makeBearDancer(300, 550, 500);
   window.prez = new makePrezDancer(300, 950, 500);
+  window.people = ['Jeff','Adnan','Bob','Bill'];
+  window.phrases = ['The bear is looking weak...',"Get 'em, Mr. President!","Where's the bathroom?"];
 
   // $('.bear').hide();
   // $('.prez').hide();
 
   //create
   var dialog = $('<div class="dialog">this is a dialog box, yeahhhhhhh!!!!</div>')
-  $('.container').append(dialog);
+  $('.container').append(dialog.hide());
 
 
   $(".addDancerButton").on("click", function(event){
@@ -37,6 +39,24 @@ $(document).ready(function(){
       $(".container").width() * Math.random(),
       Math.max(400, Math.random() * 1000)
     );
+
+    for (var i = 0; i < dancers.length; i++) {
+      var oldDancer = dancers[i];
+      var x1 = parseInt(oldDancer.$node.css('top'));
+      var y1 = parseInt(oldDancer.$node.css('left'));
+      var x2 = parseInt(dancer.$node.css('top'));
+      var y2 = parseInt(dancer.$node.css('left'));
+      var distance = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+      debugger;
+      if(distance < 400){
+        oldDancer.$node.animate({
+          top:'+=200px',
+          left:'+=200px'
+        })
+      }
+
+    }
+
     $('.container').append(dancer.$node);
     dancers.push(dancer);
   });
@@ -160,13 +180,21 @@ $(document).ready(function(){
       }
     }
   });
+  $(document.body).on('mouseover', '.spectator', function(event) {
+    var person = people[Math.floor(Math.random() * people.length)];
+    var phrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+    $('.dialog').text(person+': '+phrase);
+    $('.dialog').show();
+    /* Act on the event */
+  });
+
+  $(document.body).on('mouseout', '.spectator', function(event) {
+    $('.dialog').hide();
+    /* Act on the event */
+  });
 
   //make event handler for 'mouseover' on spectator element
-  $('.spectator').on('mouseenter', function(event) {
-    $('.dialog').hide();
-  });
-    //show the dialog box with random message
-
-
+  
 });
 

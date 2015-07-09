@@ -15,11 +15,8 @@ makeSpectator.prototype.step = function() {
 
   makeDancer.prototype.step.apply(this);
   //make the spectators jump up and down
-  var temp = Number(this.$node.css('top').slice(0,-2));
-  temp = temp + 10;
-  this.$node.animate({top: temp + 'px'});
-  temp = temp - 10;
-  this.$node.animate({top: temp + 'px'});
+  this.$node.animate({top:'+=30px'});
+  this.$node.animate({top:'-=30px'});
 };
 
 

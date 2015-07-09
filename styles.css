@@ -27,9 +27,21 @@ body, a:link, a:visited, a:active{
   height: 100%;
   margin:0 auto;
 }
+
+.dialog{
+  width:400px;
+  margin:0 auto;
+  margin-top: 15px;
+  padding:15px;
+  text-align: center;
+  border:1px solid red;
+  background-color:#482F96;
+}
+
 .title{
   background-color: #777;
 }
+
 .dancer{
   position:absolute;
 }

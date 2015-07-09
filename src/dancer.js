@@ -5,10 +5,9 @@ var makeDancer = function(top, left, timeBetweenSteps){
   this.$node = $('<span class="dancer"></span>');
 
   // makeDancer.prototype.step();
-  this.step();
-
   // this one sets the position to some random default point within the body
   this.setPosition(top,left);
+  this.step();
 };
 
 makeDancer.prototype.step = function(){
