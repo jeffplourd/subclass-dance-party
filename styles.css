@@ -25,3 +25,31 @@ body, a:link, a:visited, a:active{
   border-radius:10px;
   position:absolute;
 }
+.ourImage{
+  border-radius:100px;
+  position:absolute;
+}
+
+.animLeft {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-animation:spinLeft 1s ease;
+    -moz-animation:spinLeft 1s ease;
+    animation:spinLeft 1s ease;
+}
+@-moz-keyframes spinLeft { 100% { -moz-transform: rotate(-360deg); } }
+@-webkit-keyframes spinLeft { 100% { -webkit-transform: rotate(-360deg); } }
+@keyframes spinLeft { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
+.anim {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-animation:spin 1s linear;
+    -moz-animation:spin 1s linear;
+    animation:spin 1s linear;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

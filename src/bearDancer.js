@@ -1,11 +1,14 @@
 var makeBearDancer = function(top, left, timeBetweenSteps){
   makeDancer.call(this, top, left, timeBetweenSteps);
   this.combo = [];
-  //create and attach image
-  this.$img = $('img');
-  this.$img.src = 'http://placehold.it/100x300';
-  // $img.src = 'images/bearDancer.gif';
-  // this.$node.prepend($img);
+  
+  //adds image to screen
+  var img = $('<img id="bear" class="ourImage">');
+  img.attr('src', 'http://fillmurray.com/100/300');
+  this.$img = img;
+  $('body').append(this.$img);
+
+
 
 };
 

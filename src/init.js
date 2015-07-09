@@ -1,10 +1,8 @@
 $(document).ready(function(){
   window.dancers = [];
-  window.bear = new makeBearDancer(500, 500, 500);
-  $('body').append(bear.$node);
-  bear.$node.append(bear.$img);
+  window.bear = new makeBearDancer(1000, 500, 500);
 
-  // $('.bear').hide();
+  $('.bear').hide();
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -64,9 +62,34 @@ $(document).ready(function(){
   */
 
   $(document).on('keypress', function(event) {
-    //if keypress is equal to 65 or 70
-
+    //if keypress is equal to 65 or 70    
+    if(event.which === 97 || event.which === 102) {
       //bear.bearcombo.push(event)
+      bear.combo.push(event.which);
+      if(bear.combo.length === 2) {
+        //do action
+        if(bear.combo[0] === 97 && bear.combo[1] === 97) {
+          //action for rotate left
+          bear.$img.addClass('animLeft');
+          setTimeout(function() {
+            bear.$img.removeClass('animLeft');
+          }, 1100);          
+        }else if(bear.combo[0] === 102 && bear.combo[1] === 102) {
+          //action for rotate left
+          bear.$img.addClass('anim');
+          setTimeout(function() {
+            bear.$img.removeClass('anim');
+          }, 1100);
+        }else if(bear.combo[0] === 102 && bear.combo[1] === 97) {
+          bear.$img.animate({
+            top: 600,
+            left: 500
+          });
+        }
+        //clear the array
+        bear.combo = [];
+      }
+    }
       //bear.bearCombo.length === 3 -> do action, clear the array
         //if a, a then rotate left
         //if f, f then rotate right twice
