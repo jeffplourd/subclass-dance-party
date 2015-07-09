@@ -3,7 +3,11 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
+  /*background-image: url(http://placehold.it/1000x1000);*/
+  background-image: url(images/dancefloor.jpg);
+  background-color: #444;
+  background-position: center;
+  background-repeat: no-repeat;
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
@@ -17,23 +21,46 @@ body, a:link, a:visited, a:active{
   height:32px;
   background-color: #555;
 }
+
+.container {
+  width: 1000px;
+  height: 100%;
+  margin:0 auto;
+}
 .title{
   background-color: #777;
 }
 .dancer{
-  border:10px solid red;
-  border-radius:10px;
   position:absolute;
 }
-.ourImage{
+.spectator {
+  height: 100px;
+  width: 100px;
+}
+.ourImage, .headImage{
   border-radius:100px;
   position:absolute;
+  display:block;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.headImage{
+  z-index: 1;
+}
+
+.bear {
+  height:350px;
+  width:100px;
+}
+
+.prez {
+  height:350px;
+  width:100px;
 }
 
 .animLeft {
     position: absolute;
-    top: 50%;
-    left: 50%;
     -webkit-animation:spinLeft 1s ease;
     -moz-animation:spinLeft 1s ease;
     animation:spinLeft 1s ease;
@@ -44,8 +71,6 @@ body, a:link, a:visited, a:active{
 
 .anim {
     position: absolute;
-    top: 50%;
-    left: 50%;
     -webkit-animation:spin 1s linear;
     -moz-animation:spin 1s linear;
     animation:spin 1s linear;
@@ -53,3 +78,16 @@ body, a:link, a:visited, a:active{
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.flipLeft {
+  transform: rotateY(-360deg);
+  transition: 1s;
+  transform-style: preserve-3d;
+}
+
+.flipRight {
+  transform: rotateY(360deg);
+  transition: 1s;
+  transform-style: preserve-3d;
+}
+

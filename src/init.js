@@ -1,8 +1,15 @@
 $(document).ready(function(){
   window.dancers = [];
-  window.bear = new makeBearDancer(1000, 500, 500);
+  window.bear = new makeBearDancer(300, 550, 500);
+  window.prez = new makePrezDancer(300, 950, 500);
 
-  $('.bear').hide();
+  // $('.bear').hide();
+  // $('.prez').hide();
+
+  //create
+  var dialog = $('<div class="dialog">this is a dialog box, yeahhhhhhh!!!!</div>')
+  $('.container').append(dialog);
+
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -26,11 +33,11 @@ $(document).ready(function(){
     // make a dancer with a random position
 
     var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      $(".container").height() * Math.random(),
+      $(".container").width() * Math.random(),
       Math.max(400, Math.random() * 1000)
     );
-    $('body').append(dancer.$node);
+    $('.container').append(dancer.$node);
     dancers.push(dancer);
   });
 
@@ -49,54 +56,116 @@ $(document).ready(function(){
 
 
   /*
-  MOVES
+  Bear
 
     keys:
-      a: 65
-      f: 70
+      a: 97
+      s: 115
+      d: 100
+      f: 102
 
     //bear
-    //1. Popout
-    //2. Rotation left
-    //3. Rotate twice rigth
+    //1. a a -> rotate left
+    //2. f f -> rotate right
+    //3. d d -> flip right
+    //4. s s -> flip left
+    //
   */
+  var addAnimateClass = function(element, className, time){
+    // addAnimateClass (bear, 'animLeft',$img)
+    time = time || 1100;
+
+    element.addClass(className)
+    setTimeout(function(){
+      element.removeClass(className);
+    }, time);
+  }
 
   $(document).on('keypress', function(event) {
-    //if keypress is equal to 65 or 70    
-    if(event.which === 97 || event.which === 102) {
-      //bear.bearcombo.push(event)
-      bear.combo.push(event.which);
-      if(bear.combo.length === 2) {
-        //do action
-        if(bear.combo[0] === 97 && bear.combo[1] === 97) {
-          //action for rotate left
-          bear.$img.addClass('animLeft');
-          setTimeout(function() {
-            bear.$img.removeClass('animLeft');
-          }, 1100);          
-        }else if(bear.combo[0] === 102 && bear.combo[1] === 102) {
-          //action for rotate left
-          bear.$img.addClass('anim');
-          setTimeout(function() {
-            bear.$img.removeClass('anim');
-          }, 1100);
-        }else if(bear.combo[0] === 102 && bear.combo[1] === 97) {
-          bear.$img.animate({
-            top: 600,
-            left: 500
-          });
+    if(!bear.$node.hasClass('animLeft') && !bear.$node.hasClass('anim')) {
+      //if keypress is equal to a -> 97 or -> 102    
+      if(event.which === 97 || event.which === 102) {
+        //bear.bearcombo.push(event)
+        bear.combo.push(event.which);
+        if(bear.combo.length === 2) {
+          //do action
+          if(bear.combo[0] === 97 && bear.combo[1] === 97) {
+            //action for rotate left
+            addAnimateClass(bear.$node, 'animLeft');         
+          }else if(bear.combo[0] === 102 && bear.combo[1] === 102) {
+            //action for rotate left
+            addAnimateClass(bear.$node, 'anim');         
+          }
+          //clear the array
+          bear.combo = [];
         }
-        //clear the array
-        bear.combo = [];
+
+
+      }else if(event.which === 115 || event.which === 100) {
+        bear.combo.push(event.which);
+        if(bear.combo.length === 2) {
+          //do action
+          if(bear.combo[0] === 100 && bear.combo[1] === 100) {
+            //action for rotate left
+            addAnimateClass(bear.$node, 'flipRight');         
+          }else if(bear.combo[0] === 115 && bear.combo[1] === 115) {
+            //action for rotate left
+            addAnimateClass(bear.$node, 'flipLeft');         
+          }
+          //clear the array
+          bear.combo = [];
+        }        
       }
     }
-      //bear.bearCombo.length === 3 -> do action, clear the array
-        //if a, a then rotate left
-        //if f, f then rotate right twice
-        //if a, f then popout
-        //if f, a then jump up and down
+
   });
 
+  $(document).on('keydown', function(event) {
+    //Prez logic
+    //left left, 97 -> 37
+    //up up      115 -> 38
+    //down down 100 -> 40
+    //right right 102 -> 39
+    if(!prez.$node.hasClass('animLeft') && !prez.$node.hasClass('anim')) {
+      //if keypress is equal to a -> 97 or -> 102 
+      if(event.which === 37 || event.which === 39) {
+        //prez.prezcombo.push(event)
+        prez.combo.push(event.which);
+        if(prez.combo.length === 2) {
+          //do action
+          if(prez.combo[0] === 37 && prez.combo[1] === 37) {
+            //action for rotate left
+            addAnimateClass(prez.$node, 'animLeft');         
+          } else if(prez.combo[0] === 39 && prez.combo[1] === 39) {
+            //action for rotate left
+            addAnimateClass(prez.$node, 'anim');         
+          }
+          //clear the array
+          prez.combo = [];
+        }
+      } else if(event.which === 38 || event.which === 40) {
+        prez.combo.push(event.which);
+        if(prez.combo.length === 2) {
+          //do action
+          if(prez.combo[0] === 40 && prez.combo[1] === 40) {
+            //action for rotate left
+            addAnimateClass(prez.$node, 'flipRight');         
+          } else if(prez.combo[0] === 38 && prez.combo[1] === 38) {
+            //action for rotate left
+            addAnimateClass(prez.$node, 'flipLeft');         
+          }
+          //clear the array
+          prez.combo = [];
+        }        
+      }
+    }
+  });
+
+  //make event handler for 'mouseover' on spectator element
+  $('.spectator').on('mouseenter', function(event) {
+    $('.dialog').hide();
+  });
+    //show the dialog box with random message
 
 
 });

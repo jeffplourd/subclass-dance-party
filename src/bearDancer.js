@@ -1,14 +1,14 @@
 var makeBearDancer = function(top, left, timeBetweenSteps){
   makeDancer.call(this, top, left, timeBetweenSteps);
   this.combo = [];
+  this.score = 0;
   
   //adds image to screen
   var img = $('<img id="bear" class="ourImage">');
-  img.attr('src', 'http://fillmurray.com/100/300');
+  img.attr('src', 'http://fillmurray.com/100/400');
   this.$img = img;
-  $('body').append(this.$img);
 
-
+  $('.container').append(this.$node.append(this.$img).addClass('bear'));
 
 };
 

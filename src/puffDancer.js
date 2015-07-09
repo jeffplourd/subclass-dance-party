@@ -1,9 +1,5 @@
 var makePuffDancer = function(top, left, timeBetweenSteps) {
   makeDancer.call(this, top, left, timeBetweenSteps);
-  this.$node.addClass('puffDancer');
-  var image = $('img');
-  image.src = 'http';
-  this.$node.append(image);
 };
 
 makePuffDancer.prototype = Object.create(makeDancer.prototype);
