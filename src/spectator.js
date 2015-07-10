@@ -15,8 +15,10 @@ makeSpectator.prototype.step = function() {
 
   makeDancer.prototype.step.apply(this);
   //make the spectators jump up and down
-  this.$node.animate({top:'+=30px'});
-  this.$node.animate({top:'-=30px'});
+  if(!this.$node.hasClass('moving')){
+    this.$node.children().animate({top:'+=30px'});
+    this.$node.children().animate({top:'-=30px'});
+  }  
 };
 
 

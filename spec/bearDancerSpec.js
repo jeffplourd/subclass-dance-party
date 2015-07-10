@@ -10,6 +10,7 @@ describe("bearDancer", function() {
   });
   // 
   it("should have a jQuery  $node object", function() {
+    
     expect(bearDancer.$node).to.be.an.instanceof(jQuery);
   });
 });

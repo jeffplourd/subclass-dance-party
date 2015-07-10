@@ -3,6 +3,7 @@ var makeDancer = function(top, left, timeBetweenSteps){
   this.timeBetweenSteps = timeBetweenSteps;
   // use jQuery to create an HTML <span> tag
   this.$node = $('<span class="dancer"></span>');
+  this.score = 0;
 
   // makeDancer.prototype.step();
   // this one sets the position to some random default point within the body
@@ -23,4 +24,17 @@ makeDancer.prototype.setPosition = function(top, left){
     left: left
   };
   this.$node.css(styleSettings);
+};
+
+makeDancer.prototype.addAnimateClass = function(element, className, time){
+  // addAnimateClass (bear, 'animLeft',$img)
+  time = time || 1100;
+
+  element.addClass(className)
+  setTimeout(function(){
+    element.removeClass(className);
+  }, time);
+  this.score++;
+  $('.bearscore').text(bear.score);
+  $('.prezscore').text(prez.score);  
 };

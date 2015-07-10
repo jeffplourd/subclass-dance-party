@@ -5,7 +5,7 @@ var makeBearDancer = function(top, left, timeBetweenSteps){
   
   //adds image to screen
   var img = $('<img id="bear" class="ourImage">');
-  img.attr('src', 'http://fillmurray.com/100/400');
+  img.attr('src', 'images/dancing_bear.gif');
   this.$img = img;
 
   $('.container').append(this.$node.append(this.$img).addClass('bear'));

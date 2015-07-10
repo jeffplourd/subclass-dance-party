@@ -1,13 +1,18 @@
 body, html{
   height:100%;
 }
+html {
+  background: url(images/backalley.jpg) no-repeat center center fixed;
+  -webkit-background-size:cover;
+  background-size:cover;
+}
 body{
   margin: 0px;
   /*background-image: url(http://placehold.it/1000x1000);*/
-  background-image: url(images/dancefloor.jpg);
+  /*background-image: url(images/dancefloor.jpg);
   background-color: #444;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
@@ -57,18 +62,35 @@ body, a:link, a:visited, a:active{
   max-width: 100%;
 }
 
-.headImage{
+.head{
+  width:100px;
+  height:100px;
+  margin:0 auto;
   z-index: 1;
 }
 
 .bear {
-  height:350px;
-  width:100px;
+  height:500px;
+  width:237px;
 }
 
 .prez {
   height:350px;
-  width:100px;
+  width:400px;
+}
+
+.scoreboard {
+  height:100px;
+  width:400px;
+  margin: 0 auto;
+  margin-top: 15px;
+  border: 2px solid red;
+}
+
+.scoretext {
+  margin: 3px;
+  display:block;
+  text-align: center;
 }
 
 .animLeft {

@@ -4,7 +4,10 @@ $(document).ready(function(){
   window.prez = new makePrezDancer(300, 950, 500);
   window.people = ['Jeff','Adnan','Bob','Bill'];
   window.phrases = ['The bear is looking weak...',"Get 'em, Mr. President!","Where's the bathroom?"];
-
+  var scoreBoard = $('<div class="scoreboard"></div>');
+  var bearScoreSpan = $('<span class="scoretext">bear: <span class="bearscore">0</span></span>');
+  var prezScoreSpan = $('<span class="scoretext">prez: <span class="prezscore">0</span></span>');
+  $('.container').append(scoreBoard.append(bearScoreSpan).append(prezScoreSpan));
   // $('.bear').hide();
   // $('.prez').hide();
 
@@ -47,11 +50,13 @@ $(document).ready(function(){
       var x2 = parseInt(dancer.$node.css('top'));
       var y2 = parseInt(dancer.$node.css('left'));
       var distance = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-      debugger;
-      if(distance < 400){
+      if(distance < 200){
+        var negOrPos = Math.random() < 0.5 ? -1 : 1;
+        var newTop = x2+(negOrPos*Math.max(200, Math.random()*400));
+        var newLeft = y2+(negOrPos*Math.max(200, Math.random()*400));
         oldDancer.$node.animate({
-          top:'+=200px',
-          left:'+=200px'
+          top:'+='+newTop+'px',
+          left:'+='+newLeft+'px'
         })
       }
 
@@ -64,7 +69,11 @@ $(document).ready(function(){
   $(".lineupButton").on("click", function(event) {
     var newTop = 20;
     for(var i = 0; i < dancers.length; i++) {
+      debugger;
+      dancers[i].$node.addClass('moving');
+      debugger;
       dancers[i].$node.animate({top: newTop, left: 100})
+      dancers[i].$node.removeClass('moving');
       newTop += 50;
     }
   });
@@ -91,15 +100,15 @@ $(document).ready(function(){
     //4. s s -> flip left
     //
   */
-  var addAnimateClass = function(element, className, time){
-    // addAnimateClass (bear, 'animLeft',$img)
-    time = time || 1100;
+  // var addAnimateClass = function(element, className, time){
+  //   // addAnimateClass (bear, 'animLeft',$img)
+  //   time = time || 1100;
 
-    element.addClass(className)
-    setTimeout(function(){
-      element.removeClass(className);
-    }, time);
-  }
+  //   element.addClass(className)
+  //   setTimeout(function(){
+  //     element.removeClass(className);
+  //   }, time);
+  // }
 
   $(document).on('keypress', function(event) {
     if(!bear.$node.hasClass('animLeft') && !bear.$node.hasClass('anim')) {
@@ -111,10 +120,10 @@ $(document).ready(function(){
           //do action
           if(bear.combo[0] === 97 && bear.combo[1] === 97) {
             //action for rotate left
-            addAnimateClass(bear.$node, 'animLeft');         
+            bear.addAnimateClass(bear.$node, 'animLeft');         
           }else if(bear.combo[0] === 102 && bear.combo[1] === 102) {
             //action for rotate left
-            addAnimateClass(bear.$node, 'anim');         
+            bear.addAnimateClass(bear.$node, 'anim');         
           }
           //clear the array
           bear.combo = [];
@@ -127,10 +136,10 @@ $(document).ready(function(){
           //do action
           if(bear.combo[0] === 100 && bear.combo[1] === 100) {
             //action for rotate left
-            addAnimateClass(bear.$node, 'flipRight');         
+            bear.addAnimateClass(bear.$node, 'flipRight');         
           }else if(bear.combo[0] === 115 && bear.combo[1] === 115) {
             //action for rotate left
-            addAnimateClass(bear.$node, 'flipLeft');         
+            bear.addAnimateClass(bear.$node, 'flipLeft');         
           }
           //clear the array
           bear.combo = [];
@@ -155,10 +164,10 @@ $(document).ready(function(){
           //do action
           if(prez.combo[0] === 37 && prez.combo[1] === 37) {
             //action for rotate left
-            addAnimateClass(prez.$node, 'animLeft');         
+            prez.addAnimateClass(prez.$node, 'animLeft');         
           } else if(prez.combo[0] === 39 && prez.combo[1] === 39) {
             //action for rotate left
-            addAnimateClass(prez.$node, 'anim');         
+            prez.addAnimateClass(prez.$node, 'anim');         
           }
           //clear the array
           prez.combo = [];
@@ -169,10 +178,10 @@ $(document).ready(function(){
           //do action
           if(prez.combo[0] === 40 && prez.combo[1] === 40) {
             //action for rotate left
-            addAnimateClass(prez.$node, 'flipRight');         
+            prez.addAnimateClass(prez.$node, 'flipRight');         
           } else if(prez.combo[0] === 38 && prez.combo[1] === 38) {
             //action for rotate left
-            addAnimateClass(prez.$node, 'flipLeft');         
+            prez.addAnimateClass(prez.$node, 'flipLeft');         
           }
           //clear the array
           prez.combo = [];
